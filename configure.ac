@@ -21,7 +21,7 @@ PKG_PROG_PKG_CONFIG(0.16)
 #AM_GCONF_SOURCE_2
 
 # Collect more than 20 libraries for a prize!
-PKG_CHECK_MODULES(TRAY, clutter-1.0, gtk+-2.0)
+PKG_CHECK_MODULES(TRAY, clutter-1.0 gtk+-2.0)
 
 # Stay command-line compatible with the gnome-common configure option. Here
 # minimum/yes/maximum are the same, however.

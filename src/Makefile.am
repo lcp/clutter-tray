@@ -1,3 +1,11 @@
+NULL =
+BUILT_SOURCES =
+CLEANFILES =
+EXTRA_DIST =
+libexec_PROGRAMS =
+noinst_LTLIBRARIES =
+noinst_PROGRAMS =
+
 tray_cflags =					\
 	-I$(top_srcdir)/src			\
 	-DG_DISABLE_DEPRECATED			\
@@ -5,13 +13,13 @@ tray_cflags =					\
 	$(TRAY_CFLAGS)				\
 	$(NULL)
 
-tray_built_sources = \
-	na-marshal.h 		\
-	na-marshal.c
+#tray_built_sources = \
+#	na-marshal.h 		\
+#	na-marshal.c
 
-BUILT_SOURCES += $(tray_built_sources)
+#BUILT_SOURCES += $(tray_built_sources)
 
-TRAY_STAMP_FILES = stamp-na-marshal.h
+#TRAY_STAMP_FILES = stamp-na-marshal.h
 
 # please, keep this sorted alphabetically
 tray_source =			\
@@ -21,37 +29,37 @@ tray_source =			\
 	tray/na-tray-manager.h	\
 	$(NULL)
 
-na-marshal.h: stamp-na-marshal.h
-	@true
-stamp-na-marshal.h: Makefile tray/na-marshal.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) \
-		--prefix=_na_marshal \
-		--header \
-	$(srcdir)/tray/na-marshal.list > xgen-tmh && \
-	(cmp -s xgen-tmh na-marshal.h || cp -f xgen-tmh na-marshal.h) && \
-	rm -f xgen-tmh && \
-	echo timestamp > $(@F)
-
-na-marshal.c: Makefile tray/na-marshal.list
-	$(AM_V_GEN) (echo "#include \"na-marshal.h\"" ; \
-	 $(GLIB_GENMARSHAL) \
-		--prefix=_na_marshal \
-		--body \
-	 $(srcdir)/tray/na-marshal.list ) > xgen-tmc && \
-	cp -f xgen-tmc na-marshal.c && \
-	rm -f xgen-tmc
+#na-marshal.h: stamp-na-marshal.h
+#	@true
+#stamp-na-marshal.h: Makefile tray/na-marshal.list
+#	$(AM_V_GEN) $(GLIB_GENMARSHAL) \
+#		--prefix=_na_marshal \
+#		--header \
+#	$(srcdir)/tray/na-marshal.list > xgen-tmh && \
+#	(cmp -s xgen-tmh na-marshal.h || cp -f xgen-tmh na-marshal.h) && \
+#	rm -f xgen-tmh && \
+#	echo timestamp > $(@F)
+#
+#na-marshal.c: Makefile tray/na-marshal.list
+#	$(AM_V_GEN) (echo "#include \"na-marshal.h\"" ; \
+#	 $(GLIB_GENMARSHAL) \
+#		--prefix=_na_marshal \
+#		--body \
+#	 $(srcdir)/tray/na-marshal.list ) > xgen-tmc && \
+#	cp -f xgen-tmc na-marshal.c && \
+#	rm -f xgen-tmc
 
 noinst_LTLIBRARIES += libtray.la
 
 libtray_la_LIBADD = $(TRAY_LIBS)
 libtray_la_SOURCES =	\
 	$(tray_source)		\
-	$(tray_built_sources)	\
 	$(NULL)
+#	$(tray_built_sources)	\
 libtray_la_CPPFLAGS = $(tray_cflags)
 libtray_la_LDFLAGS = $(LDADD)
 
-CLEANFILES += $(TRAY_STAMP_FILES) $(BUILT_SOURCES)
+#CLEANFILES += $(TRAY_STAMP_FILES) $(BUILT_SOURCES)
 
 EXTRA_DIST +=					\
 	tray/na-marshal.list
